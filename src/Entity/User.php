@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -27,6 +28,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    private ?string $confirm = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nom = null;
 
@@ -36,6 +39,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $allergie = null;
 
+    public function __construct(UserPasswordHasherInterface $passwordHasher) {
+        $this->passwordHasher = $passwordHasher;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -92,10 +99,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPassword(string $password): self
     {
-        $this->password = $password;
-
+        $this->password = $this->passwordHasher->hashPassword($this,$password);
         return $this;
     }
+
+    /**
+     * Get the value of confirm
+     */
+	public function getConfirm()
+	{
+	    return $this->confirm;
+	}
+	
+	/**
+	 * Set the value of confirm
+	 *
+	 * @return  self
+	 */
+	public function setConfirm($confirm)
+	{
+	    $this->confirm = $confirm;
+	
+	    return $this;
+	}
 
     /**
      * @see UserInterface

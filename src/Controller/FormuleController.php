@@ -34,7 +34,7 @@ class FormuleController extends AbstractController
             return $this->redirectToRoute('app_formule_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('formule/new.html.twig', [
+        return $this->render('formule/new.html.twig', [
             'formule' => $formule,
             'form' => $form,
         ]);
@@ -60,7 +60,7 @@ class FormuleController extends AbstractController
             return $this->redirectToRoute('app_formule_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('formule/edit.html.twig', [
+        return $this->render('formule/edit.html.twig', [
             'formule' => $formule,
             'form' => $form,
         ]);
