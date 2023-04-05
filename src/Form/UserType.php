@@ -46,10 +46,10 @@ class UserType extends AbstractType
                         }
                     }])
                 ]
-                ]);
-            //->add('nom')
-            //->add('nb_convive')
-            //->add('allergie');
+                ])
+            ->add('nom')
+            ->add('nb_convive')
+            ->add('allergie');
     }
 
     public function configureOptions(OptionsResolver $resolver)

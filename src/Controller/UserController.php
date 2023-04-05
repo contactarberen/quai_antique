@@ -23,7 +23,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/user/new', name: 'app_user_new')]
+    #[Route('/new', name: 'app_user_new')]
     public function new(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine): Response
     {
         $user = new User($userPasswordHasher);
