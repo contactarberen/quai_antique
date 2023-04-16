@@ -7,20 +7,58 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+                rel="stylesheet" 
+                integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+                crossorigin="anonymous">
+            <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
         {% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+                crossorigin="anonymous">
+            </script>
+            <script src="{{ asset('scripts/functions.js') }}"></script>
         {% endblock %}
     </head>
     <body>
-        {% if app.user %}
-		    Bienvenue {{app.user.email}}
-		    <a href="/logout">Se déconnecter</a>
-        {% else %}
-            <a href="/login">Se connecter</a>
-            <a href="{{ path('app_user_new') }}">S'inscrire</a> 
-        {% endif %}
-        {% block body %}{% endblock %}
+        {% block header %}
+			<div class="container-fluid d-flex flex-row-reverse">
+                {% if app.user %}
+							<p class="mt-4">Bienvenue {{ app.user.email}}</p>
+							<a href="/logout" class="deconnecter btn btn-info mt-4 me-3">Se déconnecter</a>
+                        {% else %}
+							<a href="/login" class="connecter btn btn-info mt-4">Se connecter</a>
+                            <a href="{{ path('app_user_new') }}" class="sinscrire btn btn-info mt-4 me-3">S'inscrire</a>
+                        {% endif %}
+            </div>
+											
+            <nav class="navbar navbar-expand-lg navbar-light ">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">
+                        <img src="{{ asset('img/logo_quai_antique.svg') }}" alt="" width="300" height="100">
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto mt-5">
+                        <a class="menu_items nav-link active" aria-current="page" href="#">Accueil</a>
+                        <a class="menu_items nav-link" href="#">La Carte</a>
+                        <a class="menu_items nav-link" href="#">Contact</a>
+                        <a class="menu_items nav-link" href="#">A propos</a>
+                        <a class="menu_items nav-link" href="#" tabindex="-1" aria-disabled="true">Réserver</a>
+                    </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="separation container-fluid></div>
+		{% endblock %}
+        
+        
+        <div class="container-fluid"> {% block body %}{% endblock %}</div>
     </body>
 </html>

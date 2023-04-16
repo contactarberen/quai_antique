@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.53 42.33">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #1d1d1b;
+        font-family: EdwardianScriptITC, 'Edwardian Script ITC';
+        stroke: #1d1d1b;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        font-size: 36px;
+        letter-spacing: .02em;
+      }
+
+      .cls-3 {
+        font-size: 24px;
+        letter-spacing: .02em;
+      }
+    </style>
+  </defs>
+  <g id="Calque_1-2" data-name="Calque 1">
+    <text class="cls-1" transform="translate(.5 30.02)"><tspan class="cls-2" x="0" y="0">Q</tspan><tspan class="cls-3" x="25.85" y="0">uai </tspan><tspan class="cls-2" x="51.44" y="0">A</tspan><tspan class="cls-3" x="84.71" y="0">ntique</tspan></text>
+  </g>
+</svg>

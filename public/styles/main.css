@@ -1,0 +1,14 @@
+.deconnecter, .connecter, .sinscrire {
+    background-color: #A593E0 !important;
+    font-family: montserrat ;
+    border: none;
+}
+
+.separation {
+    background-color: #A593E0 !important;
+    height: 10px;
+}
+
+.menu_items {
+    font-family: montserrat ;
+}
