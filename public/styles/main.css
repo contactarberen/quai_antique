@@ -6,9 +6,21 @@
 
 .separation {
     background-color: #A593E0 !important;
-    height: 10px;
+    height: 10px !important;
 }
 
 .menu_items {
     font-family: montserrat ;
+}
+
+.bas_de_page {
+    background-color: #A593E0 !important;
+}
+
+.horaires {
+    font-family: montserrat ;
+    
+}
+.jour {
+    font-family: tahoma ;
 }

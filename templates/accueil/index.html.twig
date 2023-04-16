@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %} {% endblock %}
+
+{% block footer %} 
+    <div class="bas_de_page container-fluid pt-5 text-center">
+                <div class="row justify-content-evenly">
+                    <div class="horaires col-12 col-sm-6">
+                        <h2>Nos horaires d'ouverture</h2>
+                            <table class="table">
+                                <tbody>
+                                    {% set horaire_prec = "" %}
+                                    {% for horaire in horaires %}
+                                        <tr>
+                                            {% if horaire.jour != horaire_prec %}
+                                                <td>{{ horaire.jour }}</td>
+                                            {% else %}
+                                                <td></td>
+                                            {% endif %}
+
+                                            {% set horaire_deb = horaire.debut ? horaire.debut|date('H:i') : '' %}
+                                            {% set horaire_fin = horaire.fin ? horaire.fin|date('H:i') : '' %}
+                                            
+                                            {% if horaire_deb == "00:00" and horaire_fin == "00:00" %}
+                                                <td colspan="2">Fermé</td>
+                                            {% else %}
+                                                <td>{{ horaire_deb }}</td>
+                                                <td>{{ horaire_fin }}</td>
+                                            {% endif %}
+                                            
+                                            {% set horaire_prec = horaire.jour %}
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="3">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                    </div>
+                    <div class="infos col-12 col-sm-6">
+                        <p>Plans</p>
+                        <img src="{{ asset('img/maps.png') }}" alt="" class="img-fluid">
+                        <p>Logo A propos Nous contacter</p>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
