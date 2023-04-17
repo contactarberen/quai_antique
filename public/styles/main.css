@@ -9,6 +9,15 @@
     height: 10px !important;
 }
 
+h2 {
+    font-family: montserrat !important ;
+}
+
+p  {
+    font-family: tahoma !important ;
+    font-size: 1.1rem;
+}
+
 .menu_items {
     font-family: montserrat ;
 }
@@ -19,8 +28,16 @@
 
 .horaires {
     font-family: montserrat ;
-    
 }
-.jour {
+
+.jour  {
     font-family: tahoma ;
+}
+
+.centered {
+    font-family: tahoma;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
