@@ -1,48 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}La Carte{% endblock %}
 
 {% block body %} 
     <div class="container-fluid ">
-        <div class="row mb-5">
-            <img src="{{ asset('img/photos_entete/photo_ent_1.png') }}" alt="test" class="img-responsive">
+        <div class="row text-center">
+            <img src="{{ asset('img/photos_entete/photo_ent_2.png') }}" alt="test" class="img-responsive mb-5">
+            <h1>A LA CARTE</h1>
+            <img src="{{ asset('img/separation_lacarte/sep_1.png') }}" alt="test" class="img-responsive">
+            {% for categorie in categories %}    
+                <h2 class="mt-5">{{ categorie.nom }}</h2>
+                <hr class="bg-danger border-4 border-top border-danger">
+                {% for plat in plats %}
+                    {% if plat.categorie == categorie.nom %} 
+                        <p class="fw-bold">{{ plat.titre }}</p>
+                        <p>{{ plat.description }} - {{ plat.prix }} €</p>
+                    {#<p>{{ plat.categorie }}</p>#}
+                    {% endif %}    
+                {% endfor %}
+            {% endfor %}
         </div>
-        <div class="row row-cols-1 row-cols-sm-2">
-            <div class="text-start">
-                <img src="{{ asset('img/entrees/entree_2.jpg') }}" class="w-100 p-3" alt="...">
-            </div>
-            <div class="col text-center my-auto">
-                <h2>Restaurant Gastronomique à Chambéry</h2>
-                <p>Restaurant 3 étoiles Michelin situé en Savoie, la table gastronomique du Chef Arnaud Michant 
-                est d'une extrême sensibilité.</p> 
-                <p>Cet amoureux des "produits bruts" sait faire résonner les matières et les saveurs.</p> 
-            </div>
-
-            <div class="col text-start my-auto">
-                <h2>Expériences culinaires inoubliables</h2>
-                <p>Toute l'équipe de cuisine apporte un soin tout particulier au choix des produits.</p> 
-                <p>C'est un coin de paradis dans lequel vous pourrez découvrir l'une des meilleures tables de Savoie.</p> 
-            </div>
-            <div class="col text-end">
-                <img src="{{ asset('img/plats/plat_1.jpg') }}" class="w-100 p-3" alt="...">
-            </div>
-            
-            <div class="col text-left">
-                <img src="{{ asset('img/plats/plat_3.jpg') }}" class="w-100 p-3" alt="...">
-            </div>
-            <div class="col text-center my-auto">
-                <h2>Qualité du goût et de la présentation</h2> 
-                <p>Décor unique, ambiance chaleureuse, cuisine sensible, la table de Arnaud Michant vous convie 
-                à une expérience unique dans un lieu à part.</p>
-            </div>
-            <div class="col-12 text-left">
-                <img src="{{ asset('img/plats/plat_4.jpg') }}" class="w-100 p-3" alt="...">
-            </div>
-            <div class="col d-flex flex-row-reverse">
-                <a href="/reserver" class="reserver btn btn-info ms-5 mt-4 mb-4">Réserver</a>
-            </div>
-            
-        </div>
+        
     </div>
 {% endblock %}
 

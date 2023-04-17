@@ -1,4 +1,4 @@
-.deconnecter, .connecter, .sinscrire {
+.deconnecter, .connecter, .sinscrire, .reserver {
     background-color: #A593E0 !important;
     font-family: montserrat ;
     border: none;
@@ -9,13 +9,12 @@
     height: 10px !important;
 }
 
-h2 {
+h1, h2 {
     font-family: montserrat !important ;
 }
 
 p  {
     font-family: tahoma !important ;
-    font-size: 1.1rem;
 }
 
 .menu_items {
