@@ -19,6 +19,24 @@
                     {% endif %}    
                 {% endfor %}
             {% endfor %}
+
+            <h1>LES MENUS</h1>
+            <img src="{{ asset('img/separation_lacarte/sep_2.png') }}" alt="test" class="img-responsive">
+            {% for menu in menus %}
+                <h2 class="mt-5">{{ menu.titre }}</h2>
+                <hr class="bg-danger border-4 border-top border-danger">
+                {% for formule in formules %}
+                    {% if formule.menu == menu.titre %} 
+                        <div class="formule card mb-5 mx-auto" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ formule.titre }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ formule.disponibilite }}</h6>
+                                <p class="card-text">{{ formule.description }} - {{ formule.prix }} €</p>
+                            </div>
+                        </div>
+                    {% endif %}    
+                {% endfor %}
+            {% endfor %}
         </div>
         
     </div>

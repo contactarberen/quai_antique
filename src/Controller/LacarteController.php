@@ -15,13 +15,14 @@ class LacarteController extends AbstractController
 {
     #[Route('/lacarte', name: 'app_lacarte')]
     public function index(HoraireRepository $horaireRepository, PlatRepository $platRepository, 
-        FormuleRepository $formuleRepository,CategorieRepository $categorieRepository): Response
+        FormuleRepository $formuleRepository,CategorieRepository $categorieRepository, MenuRepository $menuRepository): Response
     {
         return $this->render('lacarte/index.html.twig', [
             'horaires' => $horaireRepository->findAll(),
             'plats' => $platRepository->findAll(),
-            'formules' => $formuleRepository->findAll(),
             'categories' => $categorieRepository->findAll(),
+            'formules' => $formuleRepository->findAll(),
+            'menus' => $menuRepository->findAll(),
         ]);
     }
 }

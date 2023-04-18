@@ -40,3 +40,7 @@ p  {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.formule {
+    background-color: #E0E3DA;
+}
