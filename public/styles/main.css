@@ -1,4 +1,4 @@
-.deconnecter, .connecter, .sinscrire, .reserver {
+.deconnecter, .connecter, .sinscrire, .reserver, .retour_acc {
     background-color: #A593E0 !important;
     font-family: montserrat ;
     border: none;
@@ -41,6 +41,6 @@ p  {
     transform: translate(-50%, -50%);
 }
 
-.formule {
+.formule_card, .login_section {
     background-color: #E0E3DA;
 }
