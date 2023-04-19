@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -48,7 +49,14 @@ class UserType extends AbstractType
                 ]
                 ])
             ->add('nom')
-            ->add('nb_convive')
+            //->add('nb_convive')
+            ->add("nb_convive", NumberType::class, [
+                "label" => "Nombre de convives",
+                "required" => true,
+                "constraints" => [
+                    new NotBlank(["message" => "Le nombre de convives ne peut pas être vide !"])
+                ]
+            ])
             ->add('allergie');
     }
 

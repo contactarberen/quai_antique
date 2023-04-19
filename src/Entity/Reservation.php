@@ -29,6 +29,8 @@ class Reservation
     #[ORM\Column(length: 255)]
     private ?string $allergie = null;
 
+    private ?string $bt_heureN = null;
+
     public function getId(): ?int
     {
         return $this->id;

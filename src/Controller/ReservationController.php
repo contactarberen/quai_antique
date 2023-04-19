@@ -24,17 +24,28 @@ class ReservationController extends AbstractController
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReservationRepository $reservationRepository): Response
     {
+        $userId = $this->getUser();
+        dump($userId->getNom());
+        
         $reservation = new Reservation();
+        $reservation->setNom($userId->getNom());
+        $reservation->setNbCouvert($userId->getNbConvive());
+        $reservation->setAllergie($userId->getAllergie());
+
         $form = $this->createForm(ReservationType::class, $reservation);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // cya: code à rajouter avant de sauvegarder la réservation notamment par rapport au jour de la résa. (lundi,..) 
+            // et les horaires d'ouverture
+
             $reservationRepository->save($reservation, true);
 
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('reservation/new.html.twig', [
+        return $this->render('reservation/new.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
         ]);
@@ -60,7 +71,7 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('reservation/edit.html.twig', [
+        return $this->render('reservation/edit.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
         ]);

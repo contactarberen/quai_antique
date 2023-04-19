@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\JourSemaine;
+use App\Entity\Parametres;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -20,6 +21,9 @@ class AppFixtures extends Fixture
         $user = new User($this->passwordHasher);
         $user->setEmail("admin@lequaiantique.fr")->setPassword("321")->setRoles(["ROLE_USER", "ROLE_ADMIN"]);
         
+        $nb_convive_seuil = new Parametres();
+        $nb_convive_seuil->setNbConviveSeuil(40);
+
         $lundi = new JourSemaine();
         $lundi->setNomJour("Lundi");
         $mardi = new JourSemaine();
@@ -36,6 +40,7 @@ class AppFixtures extends Fixture
         $dimanche->setNomJour("Dimanche");
 
         $manager->persist($user);
+        $manager->persist($nb_convive_seuil);
         $manager->persist($lundi);
         $manager->persist($mardi);
         $manager->persist($mercredi);
