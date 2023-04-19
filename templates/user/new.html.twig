@@ -1,11 +1,85 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+    {% block header %} {% endblock %}
+    <section class="login_section h-100">
+        <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+            <div class="card rounded-3 text-black">
+                <div class="row g-0">
+                    <div class="card-body p-md-5 mx-md-4">
+                        <div class="text-center">
+                            <img src="{{ asset('img/logo_quai_antique.svg') }}" alt="" width="250" height="75">
+                            <h4 class="mt-1 mb-5 pb-1">Créer un espace client</h4>
+                        </div>
+        
+                        <form method="post">
+                            {{ form_start(form) }}
+                                <div class="my-custom-class-for-errors">
+                                    {{ form_errors(form) }}
+                                </div>
 
-    {{ include('user/_form.html.twig') }}
-
-    <a href="{{ path('app_user_index') }}">back to list</a>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {{ form_label(form.email) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_widget(form.email) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_label(form.password) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_widget(form.password) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_label(form.confirm) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_widget(form.confirm) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_label(form.nom) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_widget(form.nom) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_label(form.nb_convive) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_widget(form.nb_convive) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_label(form.allergie) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_widget(form.allergie) }}
+                                    </div>
+                                </div>
+                            
+                            <div class="text-center pt-1 mb-5 pb-1">
+                                <a href="/" class="retour_acc btn mt-3 mb-3 me-3" type="button">Retour</a>
+                                <button class="sinscrire btn mt-3 mb-3">{{ button_label|default('Enregistrer') }}</button>
+                            </div>
+                            {{ form_end(form, {render_rest: false}) }}
+                            
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        
+                            <div class="d-flex align-items-center justify-content-center pb-4">
+                                <p class="mb-0 me-2">Je n'ai pas d'espace client ?</p>
+                                <a href="/user/new" class="btn btn-outline-danger" type="button">Créer un espace client</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    
 {% endblock %}

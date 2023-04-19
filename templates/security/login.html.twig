@@ -3,7 +3,7 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    {% block header %} {% endblock %} 
+    {% block header %} {% endblock %}
     <section class="login_section h-100">
         <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -26,18 +26,18 @@
                                     Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
                                 </div>
                             {% endif %}
-                            <p>J'ai un espace client</p>
+                            
         
                             <div class="form-outline mb-4">
+                                <label class="form-label" for="inputEmail">Je saisis mon e-mail</label>
                                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
                                     placeholder="Adresse email" utocomplete="email" required autofocus>
-                                <label class="form-label" for="inputEmail">Je saisis mon e-mail</label>
                             </div>
         
                             <div class="form-outline mb-4">
+                                <label class="form-label" for="inputPassword">Je saisis mon mot de passe</label>
                                 <input type="password" name="password" id="inputPassword" class="form-control" 
                                     autocomplete="current-password" required>
-                                <label class="form-label" for="inputPassword">Je saisis mon mot de passe</label>
                             </div>
 
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
