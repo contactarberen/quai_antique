@@ -25,12 +25,14 @@ class ReservationController extends AbstractController
     public function new(Request $request, ReservationRepository $reservationRepository): Response
     {
         $userId = $this->getUser();
-        dump($userId->getNom());
-        
+                
         $reservation = new Reservation();
-        $reservation->setNom($userId->getNom());
-        $reservation->setNbCouvert($userId->getNbConvive());
-        $reservation->setAllergie($userId->getAllergie());
+        if ($userId) {
+            $reservation->setNom($userId->getNom());
+            $reservation->setNbCouvert($userId->getNbConvive());
+            $reservation->setAllergie($userId->getAllergie());
+        }
+        
 
         $form = $this->createForm(ReservationType::class, $reservation);
         
