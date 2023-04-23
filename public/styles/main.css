@@ -44,3 +44,32 @@ p  {
 .formule_card, .login_section {
     background-color: #E0E3DA;
 }
+
+
+label {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+input[type="radio"] {
+    display: none;
+}
+  
+.btnHeure {
+    display: inline-block;
+    padding: 5px 10px;
+    border: no border;
+    background-color: #E0E3DA;
+    cursor: pointer;
+}
+  
+input[type="radio"]:checked + .btnHeure {
+    background-color: #c3e156;
+}
+
+.btnHeure:hover {
+    background-color: #2081f0;
+    color:white;
+    border: none;
+}

@@ -3,12 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Reservation;
+use App\Form\DataTransformer\StringToDateTimeTransformer;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bundle\SecurityBundle\Security;
 
@@ -23,8 +26,11 @@ class ReservationType extends AbstractType
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
             ])
-            ->add('heure')
             ->add('allergie', TextType::class)
+            ->add('heure', TextType::class)
+            ->get('heure')
+            ->addModelTransformer(new StringToDateTimeTransformer('H:i'))
+            
         ;
     }
 
