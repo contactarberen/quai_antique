@@ -125,7 +125,15 @@ const callbackBtnToggle = (event) => {
     heure = new Date();
     heure.setHours(initElem.value.slice(0, 2));
     heure.setMinutes(initElem.value.slice(3, 5));
-    heureInput.value = `${heure.getHours()}:${heure.getMinutes()}`;
+    
+    heureF = heure.getHours();
+    minuteF = heure.getMinutes();
+    // Si les minutes sont inférieures à 10, ajoutez un zéro devant pour les formater correctement
+    if (minuteF < 10) {
+        minuteF = '0' + minuteF;
+    }
+
+    heureInput.value = `${heureF}:${minuteF}`;
 }
 
 function buttonErase() {
@@ -149,8 +157,6 @@ choixDate.addEventListener("change", function(event){
     affichageHeures(jourReservationChoisi, date);
 });
 
-
 form.addEventListener('submit', (event => {
-    //event.preventDefault();
     heureInput.disabled = false;    
   }))
