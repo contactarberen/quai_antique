@@ -41,7 +41,7 @@ p  {
     transform: translate(-50%, -50%);
 }
 
-.formule_card, .login_section {
+.formule_card, .reservationCard, .login_section {
     background-color: #E0E3DA;
 }
 

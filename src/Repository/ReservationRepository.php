@@ -39,6 +39,19 @@ class ReservationRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByDateAndTime($date, $startTime,$endTime): array
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.date = :date')
+            ->Andwhere('r.heure BETWEEN :start_time AND :end_time')
+            ->setParameter('date', $date)
+            ->setParameter('start_time', $startTime)
+            ->setParameter('end_time', $endTime)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
 //    /**
 //     * @return Reservation[] Returns an array of Reservation objects
 //     */

@@ -1,10 +1,12 @@
 let jourReservationChoisi = '';
+let dateChoisi = '';
 
 let choixDate = document.querySelector('.date_choice');
 let heureMidi = document.querySelector('.horaireMidi');
 let heureSoir = document.querySelector('.horaireSoir');
 let heureFerme = document.querySelector('.horaireFerme');
 let heureInput = document.querySelector('.heure-input');
+let nbCouvert = document.querySelector('.nbCouvert');
 let form = document.querySelector('form');
 let submitButton = document.querySelector('.sinscrire');
 
@@ -121,7 +123,6 @@ function buttonCreation(temps, tabHeure) {
 
 const callbackBtnToggle = (event) => {
     var initElem = event.target;
-    
     heure = new Date();
     heure.setHours(initElem.value.slice(0, 2));
     heure.setMinutes(initElem.value.slice(3, 5));
@@ -134,6 +135,30 @@ const callbackBtnToggle = (event) => {
     }
 
     heureInput.value = `${heureF}:${minuteF}`;
+
+    const uneHeureApres = new Date();
+    uneHeureApres.setHours(heure.getHours());
+    uneHeureApres.setMinutes(heure.getMinutes());
+    uneHeureApres.setHours(uneHeureApres.getHours() + 1);
+    
+    uneHeureApres2 = `${uneHeureApres.getHours()}:${uneHeureApres.getMinutes()}`;
+
+    console.log(heureInput.value, uneHeureApres2);
+
+    // requête ajax
+    var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                var response = JSON.parse(this.responseText);
+                // Traitement de la réponse
+                //nbCouvert.innerText = response.heure;
+                nbCouvert.innerText = response;
+            }
+        };
+        //xhr.open('GET', "{{ path('app_reservation_getdata') }}", true);
+        //xhr.open('GET', `/reservation/getdata/${choixDate.value}/${heureInput.value}`, true);
+        xhr.open('GET', `/reservation/getdata/${dateChoisi}/${heureInput.value}/${uneHeureApres2}`, true);
+        xhr.send();
 }
 
 function buttonErase() {
@@ -144,14 +169,16 @@ function buttonErase() {
         heureSoir.removeChild(heureSoir.firstElementChild);
     }
     heureFerme.innerHTML = '';
+    //nbCouvert.innerText = '';
 }
 
 choixDate.addEventListener("change", function(event){
     const date = new Date(event.target.value);
     const joursSemaine = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
     const jour = joursSemaine[date.getDay()]; // récupération du jour de la semaine correspondant à la date
+    
     jourReservationChoisi = jour; // affichage du jour de la semaine 
-
+    dateChoisi = date.toISOString().slice(0, 10);
     buttonErase();
     // Affichage des heures possibles suivant le choix de l'utilisateur
     affichageHeures(jourReservationChoisi, date);
