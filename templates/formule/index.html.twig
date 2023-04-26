@@ -14,7 +14,7 @@
                 <th>Disponibilite</th>
                 <th>Description</th>
                 <th>Prix</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,17 +27,17 @@
                 <td>{{ formule.description }}</td>
                 <td>{{ formule.prix }}</td>
                 <td>
-                    <a href="{{ path('app_formule_show', {'id': formule.id}) }}">show</a>
-                    <a href="{{ path('app_formule_edit', {'id': formule.id}) }}">edit</a>
+                    <a href="{{ path('app_formule_show', {'id': formule.id}) }}">Afficher</a>
+                    <a href="{{ path('app_formule_edit', {'id': formule.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Aucune entrée trouvée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_formule_new') }}">Create new</a>
+    <a href="{{ path('app_formule_new') }}">Créer nouvelle formule</a>
 {% endblock %}

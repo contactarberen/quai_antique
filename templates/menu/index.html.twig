@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Menu index{% endblock %}
+{% block title %}Liste du Menu{% endblock %}
 
 {% block body %}
-    <h1>Menu index</h1>
+    <h1>Liste du Menu</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Titre</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -19,17 +19,17 @@
                 <td>{{ menu.id }}</td>
                 <td>{{ menu.titre }}</td>
                 <td>
-                    <a href="{{ path('app_menu_show', {'id': menu.id}) }}">show</a>
-                    <a href="{{ path('app_menu_edit', {'id': menu.id}) }}">edit</a>
+                    <a href="{{ path('app_menu_show', {'id': menu.id}) }}">Afficher</a>
+                    <a href="{{ path('app_menu_edit', {'id': menu.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucune entrée trouvée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_menu_new') }}">Create new</a>
+    <a href="{{ path('app_menu_new') }}">Créer nouvelle entrée</a>
 {% endblock %}

@@ -28,7 +28,7 @@
                 <td>{{ user.nom }}</td>
             </tr>
             <tr>
-                <th>Nb_convive</th>
+                <th>Nombre de convives</th>
                 <td>{{ user.nbConvive }}</td>
             </tr>
             <tr>
@@ -38,9 +38,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+    <a href="{{ path('app_user_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Editer</a>
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

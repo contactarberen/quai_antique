@@ -151,12 +151,9 @@ const callbackBtnToggle = (event) => {
             if (this.readyState === 4 && this.status === 200) {
                 var response = JSON.parse(this.responseText);
                 // Traitement de la réponse
-                //nbCouvert.innerText = response.heure;
                 nbCouvert.innerText = response;
             }
         };
-        //xhr.open('GET', "{{ path('app_reservation_getdata') }}", true);
-        //xhr.open('GET', `/reservation/getdata/${choixDate.value}/${heureInput.value}`, true);
         xhr.open('GET', `/reservation/getdata/${dateChoisi}/${heureInput.value}/${uneHeureApres2}`, true);
         xhr.send();
 }

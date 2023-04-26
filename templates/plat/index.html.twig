@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Plat index{% endblock %}
+{% block title %}Liste des Plats{% endblock %}
 
 {% block body %}
-    <h1>Plat index</h1>
+    <h1>Liste des Plats</h1>
 
     <table class="table">
         <thead>
@@ -13,7 +13,7 @@
                 <th>Categorie</th>
                 <th>Description</th>
                 <th>Prix</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -25,17 +25,17 @@
                 <td>{{ plat.description }}</td>
                 <td>{{ plat.prix }}</td>
                 <td>
-                    <a href="{{ path('app_plat_show', {'id': plat.id}) }}">show</a>
-                    <a href="{{ path('app_plat_edit', {'id': plat.id}) }}">edit</a>
+                    <a href="{{ path('app_plat_show', {'id': plat.id}) }}">Afficher</a>
+                    <a href="{{ path('app_plat_edit', {'id': plat.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">aucune entrée trouvée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_plat_new') }}">Create new</a>
+    <a href="{{ path('app_plat_new') }}">Créer nouveau plat</a>
 {% endblock %}

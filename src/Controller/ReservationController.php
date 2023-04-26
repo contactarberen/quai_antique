@@ -63,9 +63,6 @@ class ReservationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // cya: code à rajouter avant de sauvegarder la réservation notamment par rapport au jour de la résa. (lundi,..) 
-            // et les horaires d'ouverture
-
             $reservationRepository->save($reservation, true);
 
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
