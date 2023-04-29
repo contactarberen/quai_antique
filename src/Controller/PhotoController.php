@@ -6,9 +6,11 @@ use App\Entity\Photo;
 use App\Form\PhotoType;
 use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/photo')]
 class PhotoController extends AbstractController
@@ -22,19 +24,35 @@ class PhotoController extends AbstractController
     }
 
     #[Route('/new', name: 'app_photo_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, PhotoRepository $photoRepository): Response
+    public function new(Request $request, PhotoRepository $photoRepository, SluggerInterface $slugger): Response
     {
         $photo = new Photo();
         $form = $this->createForm(PhotoType::class, $photo);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('chemin')->getData();
+           
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+                try {
+                    $image->move(
+                        $this->getParameter('uploads'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    dump($e);
+                }
+                $photo->setChemin($newFilename);
+            }
             $photoRepository->save($photo, true);
 
             return $this->redirectToRoute('app_photo_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('photo/new.html.twig', [
+        return $this->render('photo/new.html.twig', [
             'photo' => $photo,
             'form' => $form,
         ]);
@@ -48,7 +66,7 @@ class PhotoController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_photo_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id<\d+>}/edit', name: 'app_photo_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Photo $photo, PhotoRepository $photoRepository): Response
     {
         $form = $this->createForm(PhotoType::class, $photo);
@@ -60,7 +78,7 @@ class PhotoController extends AbstractController
             return $this->redirectToRoute('app_photo_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('photo/edit.html.twig', [
+        return $this->render('photo/edit.html.twig', [
             'photo' => $photo,
             'form' => $form,
         ]);

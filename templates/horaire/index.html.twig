@@ -3,7 +3,7 @@
 {% block title %}Liste des Horaires{% endblock %}
 
 {% block body %}
-    <h1>Liste des horaires</h1>
+    <h2>Liste des horaires</h2>
 
     <table class="table">
         <thead>
@@ -20,8 +20,8 @@
             <tr>
                 <td>{{ horaire.id }}</td>
                 <td>{{ horaire.jour }}</td>
-                <td>{{ horaire.debut ? horaire.debut|date('H:i:s') : '' }}</td>
-                <td>{{ horaire.fin ? horaire.fin|date('H:i:s') : '' }}</td>
+                <td>{{ horaire.debut ? horaire.debut|date('H:i') : '' }}</td>
+                <td>{{ horaire.fin ? horaire.fin|date('H:i') : '' }}</td>
                 <td>
                     <a href="{{ path('app_horaire_show', {'id': horaire.id}) }}">Afficher</a>
                     <a href="{{ path('app_horaire_edit', {'id': horaire.id}) }}">Editer</a>

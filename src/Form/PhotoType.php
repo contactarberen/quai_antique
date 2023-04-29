@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Photo;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class PhotoType extends AbstractType
 {
@@ -13,7 +15,26 @@ class PhotoType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('chemin')
+            ->add('apparition')
+            ->add("chemin", FileType::class, [
+                "label" => "L'image",
+                'mapped' => false,
+                "required" => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            "image/gif",
+                            "image/png",
+                            "image/svg+xml",
+                            "image/jpg",
+                            "image/webp"
+                        ],
+                        'mimeTypesMessage' => 'Veuillez proposer une image valide.',
+                    ])
+                ],
+            ])
         ;
     }
 

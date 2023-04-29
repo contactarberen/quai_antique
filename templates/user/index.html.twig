@@ -1,17 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Users{% endblock %}
+{% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
-    <h1>Liste des Users</h1>
+    <h2>Liste des utilisateurs</h2>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
                 <th>Nom</th>
                 <th>Nombre de convives</th>
                 <th>Allergie</th>
@@ -23,14 +21,11 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
                 <td>{{ user.nom }}</td>
                 <td>{{ user.nbConvive }}</td>
                 <td>{{ user.allergie }}</td>
                 <td>
                     <a href="{{ path('app_user_show', {'id': user.id}) }}">Afficher</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -41,5 +36,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_new') }}">Créer une nouvelle entrée</a>
 {% endblock %}

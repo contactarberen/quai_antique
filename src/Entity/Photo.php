@@ -19,6 +19,9 @@ class Photo
     #[ORM\Column(length: 255)]
     private ?string $chemin = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $apparition = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Photo
     public function setChemin(string $chemin): self
     {
         $this->chemin = $chemin;
+
+        return $this;
+    }
+
+    public function getApparition(): ?int
+    {
+        return $this->apparition;
+    }
+
+    public function setApparition(?int $apparition): self
+    {
+        $this->apparition = $apparition;
 
         return $this;
     }

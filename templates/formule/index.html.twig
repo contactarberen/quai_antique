@@ -1,17 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formule index{% endblock %}
+{% block title %}Liste des formules{% endblock %}
 
 {% block body %}
-    <h1>Formule index</h1>
-
+    <h2>Liste des formules</h2>
+    <p>Avant d'ajouter une nouvelle formule, il faut au préalable définir un menu s'il n'est pas encore défini.</p>
+    <p> Pour cela, merci de cliquer sur le lien suivant: <a href="{{ path('app_menu_index') }}">Liste des menus</a></p>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Menu</th>                
                 <th>Titre</th>
-                <th>Disponibilite</th>
+                <th>Disponibilité</th>
                 <th>Description</th>
                 <th>Prix</th>
                 <th>Actions</th>

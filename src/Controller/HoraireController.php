@@ -34,7 +34,7 @@ class HoraireController extends AbstractController
             return $this->redirectToRoute('app_horaire_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('horaire/new.html.twig', [
+        return $this->render('horaire/new.html.twig', [
             'horaire' => $horaire,
             'form' => $form,
         ]);
@@ -60,7 +60,7 @@ class HoraireController extends AbstractController
             return $this->redirectToRoute('app_horaire_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('horaire/edit.html.twig', [
+        return $this->render('horaire/edit.html.twig', [
             'horaire' => $horaire,
             'form' => $form,
         ]);

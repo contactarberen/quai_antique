@@ -3,7 +3,7 @@
 {% block title %}Reservation index{% endblock %}
 
 {% block body %}
-    <h1>Liste des réservations</h1>
+    <h2>Liste des réservations</h2>
 
     <table class="table">
         <thead>
@@ -23,8 +23,8 @@
                 <td>{{ reservation.id }}</td>
                 <td>{{ reservation.nom }}</td>
                 <td>{{ reservation.nbCouvert }}</td>
-                <td>{{ reservation.date ? reservation.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ reservation.heure ? reservation.heure|date('H:i:s') : '' }}</td>
+                <td>{{ reservation.date ? reservation.date|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.heure ? reservation.heure|date('H:i') : '' }}</td>
                 <td>{{ reservation.allergie }}</td>
                 <td>
                     <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">Affiche</a>

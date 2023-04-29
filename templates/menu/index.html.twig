@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste du Menu{% endblock %}
+{% block title %}Liste des Menus{% endblock %}
 
 {% block body %}
-    <h1>Liste du Menu</h1>
+    <h2>Liste des Menus</h2>
 
     <table class="table">
         <thead>
@@ -32,4 +32,5 @@
     </table>
 
     <a href="{{ path('app_menu_new') }}">Créer nouvelle entrée</a>
+    <a href="{{ path('app_formule_index') }}">Retour à la liste des formules</a>
 {% endblock %}

@@ -34,7 +34,7 @@ class PlatController extends AbstractController
             return $this->redirectToRoute('app_plat_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('plat/new.html.twig', [
+        return $this->render('plat/new.html.twig', [
             'plat' => $plat,
             'form' => $form,
         ]);
@@ -60,7 +60,7 @@ class PlatController extends AbstractController
             return $this->redirectToRoute('app_plat_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('plat/edit.html.twig', [
+        return $this->render('plat/edit.html.twig', [
             'plat' => $plat,
             'form' => $form,
         ]);

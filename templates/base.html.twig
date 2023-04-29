@@ -14,18 +14,17 @@
             <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
         {% endblock %}
         
-
     </head>
     <body>
         {% block header %}
 			<div class="container-fluid d-flex flex-row-reverse">
                 {% if app.user %}
-							<p class="mt-4">Bienvenue {{ app.user.email}}</p>
-							<a href="/logout" class="deconnecter btn btn-info mt-4 me-3">Se déconnecter</a>
-                        {% else %}
-							<a href="/login" class="connecter btn btn-info mt-4">Se connecter</a>
-                            <a href="{{ path('app_user_new') }}" class="sinscrire btn btn-info mt-4 me-3">S'inscrire</a>
-                        {% endif %}
+                    <p class="mt-4">Bienvenue {{ app.user.email}}</p>
+                    <a href="/logout" class="btnPrincipal btn btn-info mt-4 me-3">Se déconnecter</a>
+                {% else %}
+                    <a href="/login" class="btnPrincipal btn btn-info mt-4">Se connecter</a>
+                    <a href="{{ path('app_user_new') }}" class="sinscrire btn btn-info mt-4 me-3">S'inscrire</a>
+                {% endif %}
             </div>
 											
             <nav class="navbar navbar-expand-lg navbar-light ">
@@ -33,7 +32,6 @@
                     <a class="navbar-brand" href="/">
                         <img src="{{ asset('img/logo_quai_antique.svg') }}" alt="" width="300" height="100">
                     </a>
-
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -49,6 +47,26 @@
                 </div>
             </nav>
             <div class="separation container-fluid"></div>
+            {% if is_granted('ROLE_ADMIN') %}
+            <nav class="navbar navbar-expand-lg navbar-light ">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ms-auto">
+                            <a class="menu_admin menu_items nav-link">ADMINISTRATION</p>
+                            <a class="menu_admin menu_items nav-link" aria-current="page" href="/photo">Galerie d'images</a>
+                            <a class="menu_admin menu_items nav-link" href="/plat">Les plats</a>
+                            <a class="menu_admin menu_items nav-link" href="/formule">Les formules</a>
+                            <a class="menu_admin menu_items nav-link" href="/horaire">Horaires d'ouverture</a>
+                            <a class="menu_admin menu_items nav-link" href="/user">Liste des clients</a>
+                            <a class="menu_admin menu_items nav-link" href="/reservation">Liste des réservations en cours</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            {% endif %}
 		{% endblock %}
         
         

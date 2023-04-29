@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\HoraireRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,7 +37,6 @@ class UserController extends AbstractController
             $em->flush();
             return $this->redirectToRoute("app_user_index");
         }
-        //return $this->render('user/_form.html.twig', [
         return $this->render('user/new.html.twig', [
             "form" => $form->createView(),
         ]);

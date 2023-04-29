@@ -9,7 +9,7 @@
         </div>
         <div class="row row-cols-1 row-cols-sm-2">
             <div class="text-start">
-                <img src="{{ asset('img/entrees/entree_2.jpg') }}" class="w-100 p-3" alt="...">
+                <img src={{ asset('uploads/' ~ photos[0]) }} class="w-100 p-3" alt={{photos[0]}}>
             </div>
             <div class="col text-center my-auto">
                 <h2>Restaurant Gastronomique à Chambéry</h2>
@@ -24,11 +24,11 @@
                 <p>C'est un coin de paradis dans lequel vous pourrez découvrir l'une des meilleures tables de Savoie.</p> 
             </div>
             <div class="col text-end">
-                <img src="{{ asset('img/plats/plat_1.jpg') }}" class="w-100 p-3" alt="...">
+                <img src={{ asset('uploads/' ~ photos[1]) }} class="w-100 p-3" alt={{photos[1]}}>
             </div>
             
             <div class="col text-left">
-                <img src="{{ asset('img/plats/plat_3.jpg') }}" class="w-100 p-3" alt="...">
+                <img src={{ asset('uploads/' ~ photos[2]) }} class="w-100 p-3" alt={{photos[2]}}>
             </div>
             <div class="col text-center my-auto">
                 <h2>Qualité du goût et de la présentation</h2> 
@@ -36,10 +36,10 @@
                 à une expérience unique dans un lieu à part.</p>
             </div>
             <div class="col-12 text-left">
-                <img src="{{ asset('img/plats/plat_4.jpg') }}" class="w-100 p-3" alt="...">
+                <img src={{ asset('uploads/' ~ photos[3]) }} class="w-100 p-3" alt={{photos[3]}}>
             </div>
             <div class="col d-flex flex-row-reverse">
-                <a href="/reservation/new" class="reserver btn btn-info ms-5 mt-4 mb-4">Réserver</a>
+                <a href="/reservation/new" class="btnPrincipal btn btn-info ms-5 mt-4 mb-4">Réserver</a>
             </div>
             
         </div>

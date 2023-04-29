@@ -1,16 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Photos{% endblock %}
+{% block title %}Galerie d'images{% endblock %}
 
 {% block body %}
-    <h1>Liste des Photos</h1>
-
+    <h2>Galerie d'images</h2>
+    <p>Pour faire apparaitre une image dans la page d'accueil, veuillez choisir un numéro d'apparition pour les images concernés 
+            en choisissant un chiffre de 1 à 4.</p>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Titre</th>
+                <th>Page d'accueil</th>
                 <th>Chemin</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,7 +22,9 @@
             <tr>
                 <td>{{ photo.id }}</td>
                 <td>{{ photo.titre }}</td>
+                <td>{{ photo.apparition }}</td>
                 <td>{{ photo.chemin }}</td>
+                <td><img src={{ asset('uploads/' ~ photo.chemin) }} class="card-img-top w-50" width="120" height="120" alt={{photo.chemin}}></td>
                 <td>
                     <a href="{{ path('app_photo_show', {'id': photo.id}) }}">Afficher</a>
                     <a href="{{ path('app_photo_edit', {'id': photo.id}) }}">Editer</a>
@@ -32,6 +37,5 @@
         {% endfor %}
         </tbody>
     </table>
-
     <a href="{{ path('app_photo_new') }}">Ajouter une nouvelle photo</a>
 {% endblock %}

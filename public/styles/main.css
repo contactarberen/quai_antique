@@ -1,6 +1,13 @@
-.deconnecter, .connecter, .sinscrire, .reserver, .retour_acc {
+
+.btnPrincipal, .sinscrire {
     background-color: #A593E0 !important;
     font-family: montserrat ;
+    border: none;
+}
+
+.btnPrincipal:hover, .sinscrire:hover, .menu_items:hover {
+    background-color: #2081f0 !important;
+    color:white !important;
     border: none;
 }
 
@@ -19,6 +26,11 @@ p  {
 
 .menu_items {
     font-family: montserrat ;
+}
+
+.menu_admin {
+    font-family: montserrat ;
+    background-color: #E0E3DA;
 }
 
 .bas_de_page {

@@ -34,7 +34,7 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('app_menu_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('menu/new.html.twig', [
+        return $this->render('menu/new.html.twig', [
             'menu' => $menu,
             'form' => $form,
         ]);
@@ -60,7 +60,7 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('app_menu_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('menu/edit.html.twig', [
+        return $this->render('menu/edit.html.twig', [
             'menu' => $menu,
             'form' => $form,
         ]);
