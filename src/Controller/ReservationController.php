@@ -8,7 +8,7 @@ use App\Repository\HoraireRepository;
 use App\Repository\ParametresRepository;
 use App\Repository\ReservationRepository;
 use DateTime;
-use Doctrine\Common\Collections\Expr\Value;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReservationController extends AbstractController
 {
     #[Route('/', name: 'app_reservation_index', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN', message: 'Page réservée à l\'administrateur')]
     public function index(ReservationRepository $reservationRepository): Response
     {
         return $this->render('reservation/index.html.twig', [
@@ -50,7 +51,7 @@ class ReservationController extends AbstractController
     public function new(Request $request, ReservationRepository $reservationRepository, HoraireRepository $horaireRepository): Response
     {
         $userId = $this->getUser();
-                
+                        
         $reservation = new Reservation();
         if ($userId) {
             $reservation->setNom($userId->getNom());
@@ -59,13 +60,12 @@ class ReservationController extends AbstractController
         }
         
         $form = $this->createForm(ReservationType::class, $reservation);
-        
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
             $reservationRepository->save($reservation, true);
-
-            return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute("app_accueil"); 
         }
 
         return $this->render('reservation/new.html.twig', [
@@ -102,6 +102,7 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_reservation_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN', message: 'Page réservée à l\'administrateur')]
     public function delete(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {

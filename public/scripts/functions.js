@@ -8,7 +8,7 @@ let heureFerme = document.querySelector('.horaireFerme');
 let heureInput = document.querySelector('.heure-input');
 let nbCouvert = document.querySelector('.nbCouvert');
 let form = document.querySelector('form');
-let submitButton = document.querySelector('.sinscrire');
+let btnReserver = document.querySelector('.reserver');
 
 function getHoursFromTableHoraire(jour) {
     // trouver la table dans le HTML
@@ -79,7 +79,7 @@ function affichageHeures(jour, date) {
         const tabHeureSoir = getHeureOuvertureTab(plagesHoraires,1, date);
         buttonCreation('soir', tabHeureSoir );
     } else if (plagesHoraires[0][1] == 'Fermé') {
-        heureFerme.innerHTML = '<p>Nous sommes fermés, veuillez svp choisir une autre date.</p>';
+        heureFerme.innerHTML = '<p>Nous sommes fermés, veuillez choisir une autre date.</p>';
     } else if (plagesHoraires[0][1] >= '17:00') {
         const tabHeureSoir = getHeureOuvertureTab(plagesHoraires,0, date);
         buttonCreation('soir', tabHeureSoir );
@@ -143,8 +143,6 @@ const callbackBtnToggle = (event) => {
     
     uneHeureApres2 = `${uneHeureApres.getHours()}:${uneHeureApres.getMinutes()}`;
 
-    console.log(heureInput.value, uneHeureApres2);
-
     // requête ajax
     var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -166,21 +164,33 @@ function buttonErase() {
         heureSoir.removeChild(heureSoir.firstElementChild);
     }
     heureFerme.innerHTML = '';
-    //nbCouvert.innerText = '';
 }
 
-choixDate.addEventListener("change", function(event){
-    const date = new Date(event.target.value);
-    const joursSemaine = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-    const jour = joursSemaine[date.getDay()]; // récupération du jour de la semaine correspondant à la date
-    
-    jourReservationChoisi = jour; // affichage du jour de la semaine 
-    dateChoisi = date.toISOString().slice(0, 10);
-    buttonErase();
-    // Affichage des heures possibles suivant le choix de l'utilisateur
-    affichageHeures(jourReservationChoisi, date);
-});
+if (choixDate !== null) {
+    choixDate.addEventListener("change", function(event){
+        const date = new Date(event.target.value);
+        const joursSemaine = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+        const jour = joursSemaine[date.getDay()]; // récupération du jour de la semaine correspondant à la date
+        
+        jourReservationChoisi = jour; // affichage du jour de la semaine 
+        dateChoisi = date.toISOString().slice(0, 10);
+        buttonErase();
+        // Affichage des heures possibles suivant le choix de l'utilisateur
+        affichageHeures(jourReservationChoisi, date);
+    });
+}
 
-form.addEventListener('submit', (event => {
-    heureInput.disabled = false;    
-  }))
+if (form !== null) {
+    form.addEventListener('submit', (event => {
+        heureInput.disabled = false;    
+    }))
+}
+
+if (btnReserver !== null) {
+    btnReserver.addEventListener('click', (event => {
+        if (nbCouvert.innerText != 0) {
+            alert(`Réservation enregistrée pour le ${dateChoisi} à ${heureInput.value}. Merci de votre confiance !`)
+        }  
+    }))
+}
+
