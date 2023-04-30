@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}A propos{% endblock %}
+
+{% block body %} 
+    <h5 class="ms-5 me-5">Voyage dans l'univers culinaire du Chef Arnaud Michant</h5>
+    <p class="ms-5 me-5">Le Chef Arnaud Michant aime passionnément les produits - et producteurs - de la Savoie. 
+    C'est pourquoi il a décidé d'ouvrir son troisième restaurant dans ce département.</p>
+    <p class="ms-5 me-5">Le Quai Antique est installé à Chambéry et propose au déjeuner comme au dîner une expérience 
+    gastronomique, à travers une cuisine sans artifice. Plus encore que ses deux autres restaurants, 
+    Arnaud Michant le voit comme une promesse d'un voyage dans son univers culinaire. </p>
+    <div class="col text-center">
+        <img src={{ asset('img/entrees/entree_1.jpg') }} class="w-50 p-3 mt-3 mb-3" alt='img/entree_1.jpg'>
+    </div>
+    <h5 class="ms-5 me-5">Expériences culinaires inoubliables</h5>
+    <p class="ms-5 me-5">Toute l'équipe de cuisine apporte un soin tout particulier au choix des produits.
+    C'est un coin de paradis dans lequel vous pourrez découvrir l'une des meilleures tables de Savoie.</p>
+    <h5 class="ms-5 me-5">Qualité du goût et de la présentation</h5> 
+    <p class="ms-5 me-5">Décor unique, ambiance chaleureuse, cuisine sensible, la table de Arnaud Michant vous convie 
+    à une expérience unique dans un lieu à part.</p>
+    <div class="col text-center">
+        <img src={{ asset('img/apropos/apropos2.jpg') }} class="w-50 p-3 mt-3 mb-3" alt='img/entree_1.jpg'>
+    </div>
+{% endblock %}
+
+{% block footer %} 
+    <div class="bas_de_page container-fluid pt-5 text-center">
+        <div class="row justify-content-evenly">
+            <div class="horaires col-12 col-sm-6">
+                <h2>Nos horaires d'ouverture</h2>
+                    <table class="table">
+                        <tbody>
+                            {% set horaire_prec = "" %}
+                            {% for horaire in horaires %}
+                                <tr>
+                                    {% if horaire.jour != horaire_prec %}
+                                        <td>{{ horaire.jour }}</td>
+                                    {% else %}
+                                        <td></td>
+                                    {% endif %}
+
+                                    {% set horaire_deb = horaire.debut ? horaire.debut|date('H:i') : '' %}
+                                    {% set horaire_fin = horaire.fin ? horaire.fin|date('H:i') : '' %}
+                                    
+                                    {% if horaire_deb == "00:00" and horaire_fin == "00:00" %}
+                                        <td colspan="2">Fermé</td>
+                                    {% else %}
+                                        <td>{{ horaire_deb }}</td>
+                                        <td>{{ horaire_fin }}</td>
+                                    {% endif %}
+                                    
+                                    {% set horaire_prec = horaire.jour %}
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+            <div class="infos col-12 col-sm-6">
+                <p>Plans</p>
+                <img src="{{ asset('img/maps.png') }}" alt="" class="img-fluid">
+                <div class="row p-3">
+                    <div class="col"><img src="{{ asset('img/icones_res_soc/facebook.png') }}" class="img-thumbnail"  width="30" height="30" lt="..."></div>
+                    <div class="col"><img src="{{ asset('img/icones_res_soc/instagram.png') }}" class="img-thumbnail"  width="30" height="30" alt="..."></div>
+                    <div class="col"><img src="{{ asset('img/icones_res_soc/twitter.png') }}" class="img-thumbnail"  width="30" height="30" alt="..."></div>
+                    <div class="col"><img src="{{ asset('img/icones_res_soc/whatsapp.png') }}" class="img-thumbnail"  width="30" height="30" alt="..."></div>
+                    <div class="col d-flex align-items-center">A propos</div> 
+                    <div class="col d-flex align-items-center">Nous contacter</div>
+                </div>
+                <p>2023 - yasar production pour studi © Tous droits réservés</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

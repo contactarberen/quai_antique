@@ -14,6 +14,7 @@ class AccueilController extends AbstractController
     public function index(HoraireRepository $horaireRepository, PhotoRepository $photoRepository): Response
     {
         $photosRep = $photoRepository->findAll();
+        // 4 photos sur la page d'accueil
         $photos = [0,0,0,0];
         
         foreach ($photosRep as $photo) {

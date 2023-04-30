@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous Contacter{% endblock %}
+
+{% block body %} 
+    <div class="container-fluid ">
+        <div class="row row-cols-1 row-cols-sm-2">
+            <div class="text-start">
+                <img src={{ asset('img/page_contacts/table1.jpg') }} class="w-100 p-3" alt=>
+            </div>
+            <div class="contact col text-center my-auto">
+                <h2>Adresse et Accès</h2>
+                <h4>Adresse:</h4>
+                <p>Quai Antique - 3 ponts des Amours - 74000 Annecy</p> 
+                <h4>Accès en voiture</h4>
+                <p>via la D1508 ou la D909. </p> 
+                <h4>Accès en transport</h4>
+                <p>via le bus: </p> 
+                <p>- Arrêt de bus Hôtel de Ville lignes 6,14,15,50,54.</p>
+                <p>- Arrêt de bus Paquier ligne 14.</p>  
+                <h4>Parking à proximité: </h4>
+                <p>Parking de l'Hôtel de Ville.</p>
+            </div>
+
+            <div class="contact col text-center my-auto mt-5">
+                <h2>Contacts</h2>
+                <h4>Email</h4>
+                <p>infos@quai-antique.fr</p> 
+                <h4>Téléphone</h4>
+                <p>04.05.06.07.08 ou 04.06.01.05.79</p> 
+                <h4>Retrouvez-nous également sur les réseaux</h4>
+                <p>lien en bas de page</p>
+            </div>
+            <div class="col text-end">
+                <img src={{ asset('img/page_contacts/luminaires.jpg') }} class="w-100 p-3" alt=>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %} 
+    <div class="bas_de_page container-fluid pt-5 text-center">
+        <div class="row justify-content-evenly">
+            <div class="horaires col-12 col-sm-6">
+                <h2>Nos horaires d'ouverture</h2>
+                    <table class="table">
+                        <tbody>
+                            {% set horaire_prec = "" %}
+                            {% for horaire in horaires %}
+                                <tr>
+                                    {% if horaire.jour != horaire_prec %}
+                                        <td>{{ horaire.jour }}</td>
+                                    {% else %}
+                                        <td></td>
+                                    {% endif %}
+
+                                    {% set horaire_deb = horaire.debut ? horaire.debut|date('H:i') : '' %}
+                                    {% set horaire_fin = horaire.fin ? horaire.fin|date('H:i') : '' %}
+                                    
+                                    {% if horaire_deb == "00:00" and horaire_fin == "00:00" %}
+                                        <td colspan="2">Fermé</td>
+                                    {% else %}
+                                        <td>{{ horaire_deb }}</td>
+                                        <td>{{ horaire_fin }}</td>
+                                    {% endif %}
+                                    
+                                    {% set horaire_prec = horaire.jour %}
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+            <div class="infos col-12 col-sm-6">
+                <p>Plans</p>
+                <img src="{{ asset('img/maps.png') }}" alt="" class="img-fluid">
+                <div class="row p-3">
+                    <div class="col"><img src="{{ asset('img/icones_res_soc/facebook.png') }}" class="img-thumbnail"  width="30" height="30" lt="..."></div>
+                    <div class="col"><img src="{{ asset('img/icones_res_soc/instagram.png') }}" class="img-thumbnail"  width="30" height="30" alt="..."></div>
+                    <div class="col"><img src="{{ asset('img/icones_res_soc/twitter.png') }}" class="img-thumbnail"  width="30" height="30" alt="..."></div>
+                    <div class="col"><img src="{{ asset('img/icones_res_soc/whatsapp.png') }}" class="img-thumbnail"  width="30" height="30" alt="..."></div>
+                    <div class="col d-flex align-items-center">A propos</div> 
+                    <div class="col d-flex align-items-center">Nous contacter</div>
+                </div>
+                <p>2023 - yasar production pour studi © Tous droits réservés</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

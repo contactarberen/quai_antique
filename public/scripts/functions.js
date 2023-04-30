@@ -9,6 +9,9 @@ let heureInput = document.querySelector('.heure-input');
 let nbCouvert = document.querySelector('.nbCouvert');
 let form = document.querySelector('form');
 let btnReserver = document.querySelector('.reserver');
+let menuUser = document.querySelectorAll('.menu_items');
+let menuAdmin = document.querySelectorAll('.menu_admin');
+
 
 function getHoursFromTableHoraire(jour) {
     // trouver la table dans le HTML
@@ -193,4 +196,27 @@ if (btnReserver !== null) {
         }  
     }))
 }
+
+menuUser.forEach(function(item) {
+    item.addEventListener('click', function() {
+        menuUser.forEach(function(item) {
+        item.classList.remove('active');
+        console.log(item.innerText,item.classList);
+      });
+     this.classList.add('active');
+      console.log(item.innerText,item.classList);
+    });
+});
+
+
+menuAdmin.forEach(function(item) {
+    item.addEventListener('click', function() {
+        menuAdmin.forEach(function(item) {
+        item.classList.remove('active');
+        console.log(item.innerText,item.classList);
+      });
+      this.classList.add('active');
+      console.log(item.innerText,item.classList);
+    });
+});
 

@@ -36,12 +36,16 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav ms-auto mt-5">
-                            <a class="menu_items nav-link active" aria-current="page" href="/">Accueil</a>
+                        <div class="navbar-nav ms-auto mt-5" id="menu-user">
+                            <a class="menu_items nav-link" href="/">Accueil</a>
                             <a class="menu_items nav-link" href="/lacarte">La Carte</a>
                             <a class="menu_items nav-link" href="/contact">Contact</a>
                             <a class="menu_items nav-link" href="/apropos">A propos</a>
-                            <a class="menu_items nav-link" href="/reservation/new">Réserver</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="menu_items nav-link disabled" href="/reservation/new">Réserver</a>
+                            {% else %}
+                                <a class="menu_items nav-link" href="/reservation/new">Réserver</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -55,13 +59,13 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav ms-auto">
-                            <a class="menu_admin menu_items nav-link">ADMINISTRATION</p>
-                            <a class="menu_admin menu_items nav-link" aria-current="page" href="/photo">Galerie d'images</a>
-                            <a class="menu_admin menu_items nav-link" href="/plat">Les plats</a>
-                            <a class="menu_admin menu_items nav-link" href="/formule">Les formules</a>
-                            <a class="menu_admin menu_items nav-link" href="/horaire">Horaires d'ouverture</a>
-                            <a class="menu_admin menu_items nav-link" href="/user">Liste des clients</a>
-                            <a class="menu_admin menu_items nav-link" href="/reservation">Liste des réservations en cours</a>
+                            <a class="menu_admin nav-link">ADMINISTRATION</p>
+                            <a class="menu_admin nav-link" href="/photo">Galerie d'images</a>
+                            <a class="menu_admin nav-link" href="/plat">Les plats</a>
+                            <a class="menu_admin nav-link" href="/formule">Les formules</a>
+                            <a class="menu_admin nav-link" href="/horaire">Horaires d'ouverture</a>
+                            <a class="menu_admin nav-link" href="/user">Liste des clients</a>
+                            <a class="menu_admin nav-link" href="/reservation">Liste des réservations en cours</a>
                         </div>
                     </div>
                 </div>
@@ -79,7 +83,7 @@
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
                 crossorigin="anonymous">
             </script>
-        <script src="{{ asset('scripts/functions.js') }}"></script>    
+        <script src="{{ asset('scripts/functions.js?v=12') }}"></script>    
         {% endblock %}
     </body>
 </html>

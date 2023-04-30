@@ -5,7 +5,7 @@
     border: none;
 }
 
-.btnPrincipal:hover, .sinscrire:hover, .menu_items:hover {
+.btnPrincipal:hover, .sinscrire:hover, .menu_items:hover, .menu_admin:hover {
     background-color: #2081f0 !important;
     color:white !important;
     border: none;
@@ -53,7 +53,7 @@ p  {
     transform: translate(-50%, -50%);
 }
 
-.formule_card, .reservationCard, .login_section {
+.formule_card, .reservationCard, .login_section, .contact {
     background-color: #E0E3DA;
 }
 
