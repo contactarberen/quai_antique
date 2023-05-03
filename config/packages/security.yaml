@@ -37,9 +37,7 @@ security:
         - { path: ^/formule, roles: ROLE_ADMIN }
         - { path: ^/menu, roles: ROLE_ADMIN }
         - { path: ^/horaire, roles: ROLE_ADMIN }
-        - { path: ^/user, roles: ROLE_ADMIN }
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        #- { path: ^/user, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

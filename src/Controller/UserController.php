@@ -12,11 +12,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/user')]
 class UserController extends AbstractController
 {
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
+    // QA-60: seule la page d'inscription doit être disponible à tout le monde
+    #[IsGranted('ROLE_ADMIN', message: 'Page réservée à l\'administrateur')]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/index.html.twig', [
@@ -44,6 +47,8 @@ class UserController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
+    // QA-60: seule la page d'inscription doit être disponible à tout le monde
+    #[IsGranted('ROLE_ADMIN', message: 'Page réservée à l\'administrateur')]
     public function show(User $user): Response
     {
         return $this->render('user/show.html.twig', [
@@ -52,6 +57,8 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    // QA-60: seule la page d'inscription doit être disponible à tout le monde
+    #[IsGranted('ROLE_ADMIN', message: 'Page réservée à l\'administrateur')]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
         $form = $this->createForm(UserType::class, $user);
@@ -70,6 +77,8 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    // QA-60: seule la page d'inscription doit être disponible à tout le monde
+    #[IsGranted('ROLE_ADMIN', message: 'Page réservée à l\'administrateur')]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
