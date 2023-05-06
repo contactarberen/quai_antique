@@ -174,12 +174,21 @@ if (choixDate !== null) {
         const date = new Date(event.target.value);
         const joursSemaine = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
         const jour = joursSemaine[date.getDay()]; // récupération du jour de la semaine correspondant à la date
+        // QA-63
+        const currentDate = new Date();
         
-        jourReservationChoisi = jour; // affichage du jour de la semaine 
-        dateChoisi = date.toISOString().slice(0, 10);
-        buttonErase();
-        // Affichage des heures possibles suivant le choix de l'utilisateur
-        affichageHeures(jourReservationChoisi, date);
+        // QA-63
+        if (date < currentDate) {
+            alert('Veuillez choisir une date convenable (supérieure à la date du jour).');
+            event.target.value = '';
+        } else {
+            jourReservationChoisi = jour; // affichage du jour de la semaine 
+            dateChoisi = date.toISOString().slice(0, 10);
+            buttonErase();
+            // Affichage des heures possibles suivant le choix de l'utilisateur
+            affichageHeures(jourReservationChoisi, date);
+        }
+        
     });
 }
 
