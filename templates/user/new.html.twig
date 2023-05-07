@@ -68,11 +68,7 @@
                             {{ form_end(form, {render_rest: false}) }}
                             
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        
-                            <div class="d-flex align-items-center justify-content-center pb-4">
-                                <p class="mb-0 me-2">Je n'ai pas d'espace client ?</p>
-                                <a href="/user/new" class="btn btn-outline-danger" type="button">Créer un espace client</a>
-                            </div>
+                        {# QA-67: Dans la page inscription, supprimer la dernière partie "Je n'ai pas d'espace client ?"  #}
                         </form>
                     </div>
                 </div>
