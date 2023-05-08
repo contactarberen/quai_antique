@@ -198,15 +198,14 @@ if (choixDate !== null) {
 if (form !== null) {
     form.addEventListener('submit', (event => {
         heureInput.disabled = false;
-    }))
-}
-
-if (btnReserver !== null) {
-    btnReserver.addEventListener('click', (event => {
-        // QA-69
-        if ((nbCouvertRestant.innerText != 0) && (nomReservation.value !== "") 
+        event.preventDefault();
+        // QA-70 - QA-69
+        if ((nbCouvertRestant.innerText != 0) && (nbCouvert.value !== "") && (+nbCouvert.value > +nbCouvertRestant.innerText)) {
+            alert('Il n\'y a plus de place pour le créneau choisi. Veuillez sélectionner une autre heure.');
+        } else if ((nbCouvertRestant.innerText != 0) && (nomReservation.value !== "") 
                 && (nbCouvert.value !== "") && (allergie.value !== "")) {
             alert(`Réservation enregistrée pour le ${dateChoisi} à ${heureInput.value}. Merci de votre confiance !`);
+            form.submit();
         }
     }))
 }
