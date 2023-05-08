@@ -8,8 +8,14 @@
             <img src="{{ asset('img/photos_entete/photo_ent_1.png') }}" alt="test" class="img-responsive">
         </div>
         <div class="row row-cols-1 row-cols-sm-2">
-            <div class="text-start">
-                <img src={{ asset('uploads/' ~ photos[0]) }} class="w-100 p-3" alt={{photos[0]}}>
+            <div class="photo text-start">
+                <img src={{ asset('uploads/' ~ photos_nom[0]) }} class="w-100 p-3" alt={{photos_nom[0]}}>
+                {#QA-66:titre lors du survol #}
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <h4 class="titre">{{photos_titre[0]}}</h4>
+                    </div>
+                </div>
             </div>
             <div class="col text-center my-auto">
                 <h2>Restaurant Gastronomique à Chambéry</h2>
@@ -23,20 +29,38 @@
                 <p>Toute l'équipe de cuisine apporte un soin tout particulier au choix des produits.</p> 
                 <p>C'est un coin de paradis dans lequel vous pourrez découvrir l'une des meilleures tables de Savoie.</p> 
             </div>
-            <div class="col text-end">
-                <img src={{ asset('uploads/' ~ photos[1]) }} class="w-100 p-3" alt={{photos[1]}}>
+            <div class="photo col text-end">
+                <img src={{ asset('uploads/' ~ photos_nom[1]) }} class="w-100 p-3" alt={{photos_nom[1]}}>
+                {#QA-66:titre lors du survol #}
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <h4 class="titre">{{photos_titre[1]}}</h4>
+                     </div>
+                </div>
             </div>
             
-            <div class="col text-left">
-                <img src={{ asset('uploads/' ~ photos[2]) }} class="w-100 p-3" alt={{photos[2]}}>
+            <div class="photo col text-left">
+                <img src={{ asset('uploads/' ~ photos_nom[2]) }} class="w-100 p-3" alt={{photos_nom[2]}}>
+                {#QA-66:titre lors du survol #}
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <h4 class="titre">{{photos_titre[2]}}</h4>
+                     </div>
+                </div>
             </div>
             <div class="col text-center my-auto">
                 <h2>Qualité du goût et de la présentation</h2> 
                 <p>Décor unique, ambiance chaleureuse, cuisine sensible, la table de Arnaud Michant vous convie 
                 à une expérience unique dans un lieu à part.</p>
             </div>
-            <div class="col-12 text-left">
-                <img src={{ asset('uploads/' ~ photos[3]) }} class="w-100 p-3" alt={{photos[3]}}>
+            <div class="photo col-12 text-left">
+                <img src={{ asset('uploads/' ~ photos_nom[3]) }} class="w-100 p-3" alt={{photos_nom[3]}}>
+                {#QA-66:titre lors du survol #}
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <h4 class="titre">{{photos_titre[3]}}</h4>
+                     </div>
+                </div>
             </div>
             <div class="col d-flex flex-row-reverse">
                 <a href="/reservation/new" class="btnPrincipal btn btn-info ms-5 mt-4 mb-4">Réserver</a>

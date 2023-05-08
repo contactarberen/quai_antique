@@ -15,28 +15,35 @@ class AccueilController extends AbstractController
     {
         $photosRep = $photoRepository->findAll();
         // 4 photos sur la page d'accueil
-        $photos = [0,0,0,0];
+        $photos_nom = [0,0,0,0];
+        $photos_titre = ['','','',''];
+
         
         foreach ($photosRep as $photo) {
             switch($photo->getApparition()) {
                 case 1:
-                    $photos[0] =  $photo->getChemin();
+                    $photos_nom[0] =  $photo->getChemin();
+                    $photos_titre[0] =  $photo->getTitre();
                     break;
                 case 2:
-                    $photos[1] =  $photo->getChemin();
+                    $photos_nom[1] =  $photo->getChemin();
+                    $photos_titre[1] =  $photo->getTitre();
                     break;
                 case 3:
-                    $photos[2] =  $photo->getChemin();
+                    $photos_nom[2] =  $photo->getChemin();
+                    $photos_titre[2] =  $photo->getTitre();
                     break;
                 case 4:
-                    $photos[3] =  $photo->getChemin();
+                    $photos_nom[3] =  $photo->getChemin();
+                    $photos_titre[3] =  $photo->getTitre();
                     break;
             }
         }
         
         return $this->render('accueil/index.html.twig', [
             'horaires' => $horaireRepository->findAll(),
-            'photos' => $photos,
+            'photos_nom' => $photos_nom,
+            'photos_titre' => $photos_titre,
         ]);
     }
 }

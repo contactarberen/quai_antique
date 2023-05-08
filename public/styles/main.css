@@ -85,3 +85,40 @@ input[type="radio"]:checked + .btnHeure {
     color:white;
     border: none;
 }
+
+/* QA-66: affichage du titre de la photo lors du survol */
+.photo {
+    position: relative;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(101, 76, 181, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .photo:hover .overlay {
+    opacity: 1;
+  }
+  
+  .overlay-content {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+  }
+  
+  .titre {
+    font-size: 18px;
+    margin: 0;
+    padding: 10px;
+  }
+  /* fin affichage du titre de la photo lors du survol */
+  
