@@ -6,12 +6,15 @@ let heureMidi = document.querySelector('.horaireMidi');
 let heureSoir = document.querySelector('.horaireSoir');
 let heureFerme = document.querySelector('.horaireFerme');
 let heureInput = document.querySelector('.heure-input');
-let nbCouvert = document.querySelector('.nbCouvert');
+let nbCouvertRestant = document.querySelector('.nbCouvertRestant');
 let form = document.querySelector('form');
 let btnReserver = document.querySelector('.reserver');
 let menuUser = document.querySelectorAll('.menu_items');
 let menuAdmin = document.querySelectorAll('.menu_admin');
-
+// QA-69
+let nomReservation = document.querySelector('.nomReservation');
+let nbCouvert = document.querySelector('.nbCouvert');
+let allergie = document.querySelector('.allergie');
 
 function getHoursFromTableHoraire(jour) {
     // trouver la table dans le HTML
@@ -152,7 +155,7 @@ const callbackBtnToggle = (event) => {
             if (this.readyState === 4 && this.status === 200) {
                 var response = JSON.parse(this.responseText);
                 // Traitement de la réponse
-                nbCouvert.innerText = response;
+                nbCouvertRestant.innerText = response;
             }
         };
         xhr.open('GET', `/reservation/getdata/${dateChoisi}/${heureInput.value}/${uneHeureApres2}`, true);
@@ -194,15 +197,17 @@ if (choixDate !== null) {
 
 if (form !== null) {
     form.addEventListener('submit', (event => {
-        heureInput.disabled = false;    
+        heureInput.disabled = false;
     }))
 }
 
 if (btnReserver !== null) {
     btnReserver.addEventListener('click', (event => {
-        if (nbCouvert.innerText != 0) {
-            alert(`Réservation enregistrée pour le ${dateChoisi} à ${heureInput.value}. Merci de votre confiance !`)
-        }  
+        // QA-69
+        if ((nbCouvertRestant.innerText != 0) && (nomReservation.value !== "") 
+                && (nbCouvert.value !== "") && (allergie.value !== "")) {
+            alert(`Réservation enregistrée pour le ${dateChoisi} à ${heureInput.value}. Merci de votre confiance !`);
+        }
     }))
 }
 
@@ -216,7 +221,6 @@ menuUser.forEach(function(item) {
       console.log(item.innerText,item.classList);
     });
 });
-
 
 menuAdmin.forEach(function(item) {
     item.addEventListener('click', function() {

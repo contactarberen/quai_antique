@@ -23,7 +23,7 @@
                                 <div class="reservationCard card mb-2 mx-auto" style="width: 18rem;">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">Couverts disponibles</h5>
-                                        <h6 class="nbCouvert card-subtitle mb-2 text-muted text-center">--</h6>
+                                        <h6 class="nbCouvertRestant card-subtitle mb-2 text-muted text-center">--</h6>
                                         <p class="card-text">suivant la date et l'heure choisie</p>
                                     </div>
                                 </div>
@@ -32,19 +32,22 @@
                                         {{ form_label(form.nom) }}
                                     </div>
                                     <div class="col-12 mb-2">
-                                        {{ form_widget(form.nom) }}
+                                        {# QA-69 #}
+                                        {{ form_widget(form.nom, {'attr': {'class': 'nomReservation'}})}}
                                     </div>
                                     <div class="col-12">
                                         {{ form_label(form.nbCouvert) }}
                                     </div>
                                     <div class="col-12 mb-2">
-                                        {{ form_widget(form.nbCouvert) }}
+                                        {# QA-69 #}
+                                        {{ form_widget(form.nbCouvert, {'attr': {'class': 'nbCouvert'}})}}
                                     </div>
                                     <div class="col-12">
                                         {{ form_label(form.allergie) }}
                                     </div>
                                     <div class="col-12 mb-2">
-                                        {{ form_widget(form.allergie) }}
+                                        {# QA-69 #}
+                                        {{ form_widget(form.allergie, {'attr': {'class': 'allergie'}})}}
                                     </div>
                                     <div class="col-12">
                                         {{ form_label(form.date) }}
