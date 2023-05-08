@@ -21,10 +21,12 @@
         {% for photo in photos %}
             <tr>
                 <td>{{ photo.id }}</td>
-                <td>{{ photo.titre }}</td>
+                {#QA-68:limitation de la largeur de la colonne #}
+                <td class="col-4">{{ photo.titre }}</td>
                 <td>{{ photo.apparition }}</td>
                 <td>{{ photo.chemin }}</td>
-                <td><img src={{ asset('uploads/' ~ photo.chemin) }} class="card-img-top w-50" width="120" height="120" alt={{photo.chemin}}></td>
+                {#QA-68:limitation de la largeur de la colonne #}
+                <td class="col-3"><img src={{ asset('uploads/' ~ photo.chemin) }} class="card-img-top w-50" width="120" height="120" alt={{photo.chemin}}></td>
                 <td>
                     <a href="{{ path('app_photo_show', {'id': photo.id}) }}">Afficher</a>
                     <a href="{{ path('app_photo_edit', {'id': photo.id}) }}">Editer</a>
