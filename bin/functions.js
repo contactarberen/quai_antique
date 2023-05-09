@@ -148,13 +148,29 @@ function buttonCreation(temps, tabHeure) {
         radioBtn.addEventListener("click", callbackBtnToggle);
     }
 }
-
+// QA-71
 function formatMinute(heure) {
     minuteF = heure.getMinutes();
     if (minuteF < 10) {
         minuteF = '0' + minuteF;
     }
     return minuteF;
+}
+// QA-71
+function retourneTimeHourModified(x, heure) {    // Retourne l'heure x heures après si positif et x heures avant si négatif
+    let date = new Date();
+    date.setHours(heure.getHours());
+    date.setMinutes(heure.getMinutes());
+    date.setHours(date.getHours() + x);
+    return `${date.getHours()}:${formatMinute(date)}`;
+}
+// QA-71
+function retourneTimeMinModified(x, heure) {    // Retourne l'heure x minutes après si positif et x minutes avant si négatif
+    let date = new Date();
+    date.setHours(heure.getHours());
+    date.setMinutes(heure.getMinutes());
+    date.setMinutes(date.getMinutes() + x);
+    return `${date.getHours()}:${formatMinute(date)}`;
 }
 
 const callbackBtnToggle = (event) => {
@@ -171,75 +187,35 @@ const callbackBtnToggle = (event) => {
     t = (heureF > 17) ? 1 : 0;
 
     heureInput.value = `${heureF}:${minuteF}`;
-    console.log('ultime controle',heureInput.value,horaire_premier);
+    // QA-71
     switch (heureInput.value) {
         case(horaire_premier[t]):
-            let uneHeureApres = new Date();
-            uneHeureApres.setHours(heure.getHours());
-            uneHeureApres.setMinutes(heure.getMinutes());
-            uneHeureApres.setHours(uneHeureApres.getHours() + 1);
-            let uneHeureApres2 = `${uneHeureApres.getHours()}:${formatMinute(uneHeureApres)}`;
             startTime = heureInput.value;
-            endTime = uneHeureApres2;
+            endTime = retourneTimeHourModified(1, heure) // 1 heure après
             console.log('startTime',startTime);
             console.log('endTime',endTime);
             break;
         case(horaire_deuxieme[t]):
-            let quinzeMinAvant = new Date();
-            quinzeMinAvant.setHours(heure.getHours());
-            quinzeMinAvant.setMinutes(heure.getMinutes());
-            quinzeMinAvant.setMinutes(quinzeMinAvant.getMinutes() - 15);
-            let quinzeMinAvant2 = `${quinzeMinAvant.getHours()}:${formatMinute(quinzeMinAvant)}`;
-            let t45minApres = new Date();
-            t45minApres.setHours(heure.getHours());
-            t45minApres.setMinutes(heure.getMinutes());
-            t45minApres.setMinutes(t45minApres.getMinutes() + 45);
-            let t45minApres2 = `${t45minApres.getHours()}:${formatMinute(t45minApres)}`;
-            startTime = quinzeMinAvant2;
-            endTime = t45minApres2;
+            startTime = retourneTimeMinModified(-15, heure);// 15 minutes avant
+            endTime = retourneTimeMinModified(45, heure); // 45 minutes après
             console.log('startTime',startTime);
             console.log('endTime',endTime);
             break;
         case(horaire_avant_dernier[t]):
-            let t45minAvant = new Date();
-            t45minAvant.setHours(heure.getHours());
-            t45minAvant.setMinutes(heure.getMinutes());
-            t45minAvant.setMinutes(t45minAvant.getMinutes() - 45);
-            let t45minAvant2 = `${t45minAvant.getHours()}:${formatMinute(t45minAvant)}`;
-            let quinzeMinApres = new Date();
-            quinzeMinApres.setHours(heure.getHours());
-            quinzeMinApres.setMinutes(heure.getMinutes());
-            quinzeMinApres.setMinutes(quinzeMinApres.getMinutes() + 15);
-            let quinzeMinApres2 = `${quinzeMinApres.getHours()}:${formatMinute(quinzeMinApres)}`;
-            startTime = t45minAvant2;
-            endTime = quinzeMinApres2;
+            startTime = retourneTimeMinModified(-45, heure);// 45 minutes avant
+            endTime = retourneTimeMinModified(15, heure); // 15 minutes après
             console.log('startTime',startTime);
             console.log('endTime',endTime);
             break;
         case(horaire_dernier[t]):
-            let uneHeureAvant = new Date();
-            uneHeureAvant.setHours(heure.getHours());
-            uneHeureAvant.setMinutes(heure.getMinutes());
-            uneHeureAvant.setHours(uneHeureAvant.getHours() - 1);
-            let uneHeureAvant2 = `${uneHeureAvant.getHours()}:${formatMinute(uneHeureAvant)}`;
-            startTime = uneHeureAvant2;
+            startTime = retourneTimeHourModified(-1, heure) // 1 heure avant
             endTime = heureInput.value;
             console.log('startTime',startTime);
             console.log('endTime',endTime);
             break;
         default:
-            let t30minAvant = new Date();
-            t30minAvant.setHours(heure.getHours());
-            t30minAvant.setMinutes(heure.getMinutes());
-            t30minAvant.setMinutes(t30minAvant.getMinutes() - 30);
-            let t30minAvant2 = `${t30minAvant.getHours()}:${formatMinute(t30minAvant)}`;
-            let t30MinApres = new Date();
-            t30MinApres.setHours(heure.getHours());
-            t30MinApres.setMinutes(heure.getMinutes());
-            t30MinApres.setMinutes(t30MinApres.getMinutes() + 30);
-            let t30MinApres2 = `${t30MinApres.getHours()}:${formatMinute(t30MinApres)}`;
-            startTime = t30minAvant2;
-            endTime = t30MinApres2;
+            startTime = retourneTimeMinModified(-30, heure);// 30 minutes avant
+            endTime = retourneTimeMinModified(30, heure); // 30 minutes après
             console.log('startTime',startTime);
             console.log('endTime',endTime);
     }
@@ -254,6 +230,7 @@ const callbackBtnToggle = (event) => {
                 nbCouvertRestant.innerText = response;
             }
         };
+        // QA-71
         xhr.open('GET', `/reservation/getdata/${dateChoisi}/${startTime}/${endTime}`, true);
         xhr.send();
 }
