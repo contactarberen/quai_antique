@@ -32,7 +32,7 @@ class PhotoController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('chemin')->getData();
-           
+                      
             if ($image) {
                 $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
@@ -67,12 +67,30 @@ class PhotoController extends AbstractController
     }
 
     #[Route('/{id<\d+>}/edit', name: 'app_photo_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Photo $photo, PhotoRepository $photoRepository): Response
+    public function edit(Request $request, Photo $photo, PhotoRepository $photoRepository, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(PhotoType::class, $photo);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // QA-62:start
+            $image = $form->get('chemin')->getData();
+                      
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+                try {
+                    $image->move(
+                        $this->getParameter('uploads'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    dump($e);
+                }
+                $photo->setChemin($newFilename);
+            }
+            // QA-62:end
             $photoRepository->save($photo, true);
 
             return $this->redirectToRoute('app_photo_index', [], Response::HTTP_SEE_OTHER);

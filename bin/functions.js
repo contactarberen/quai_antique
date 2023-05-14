@@ -192,35 +192,24 @@ const callbackBtnToggle = (event) => {
         case(horaire_premier[t]):
             startTime = heureInput.value;
             endTime = retourneTimeHourModified(1, heure) // 1 heure après
-            console.log('startTime',startTime);
-            console.log('endTime',endTime);
             break;
         case(horaire_deuxieme[t]):
             startTime = retourneTimeMinModified(-15, heure);// 15 minutes avant
             endTime = retourneTimeMinModified(45, heure); // 45 minutes après
-            console.log('startTime',startTime);
-            console.log('endTime',endTime);
             break;
         case(horaire_avant_dernier[t]):
             startTime = retourneTimeMinModified(-45, heure);// 45 minutes avant
             endTime = retourneTimeMinModified(15, heure); // 15 minutes après
-            console.log('startTime',startTime);
-            console.log('endTime',endTime);
             break;
         case(horaire_dernier[t]):
             startTime = retourneTimeHourModified(-1, heure) // 1 heure avant
             endTime = heureInput.value;
-            console.log('startTime',startTime);
-            console.log('endTime',endTime);
             break;
         default:
             startTime = retourneTimeMinModified(-30, heure);// 30 minutes avant
             endTime = retourneTimeMinModified(30, heure); // 30 minutes après
-            console.log('startTime',startTime);
-            console.log('endTime',endTime);
     }
-    
-    
+        
     // requête ajax
     let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
