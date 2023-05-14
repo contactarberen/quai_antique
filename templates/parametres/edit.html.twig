@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer les paramètres{% endblock %}
+
+{% block body %}
+    <h2>Editer les paramètres</h2>
+
+    {{ include('parametres/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <a href="{{ path('app_parametres') }}">Retour à la liste</a>
+{% endblock %}

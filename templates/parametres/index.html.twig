@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paramètres{% endblock %}
+
+{% block body %}
+    <h2>Liste des paramètres</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Convives maximum à un instant donné</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for parametre in parametres %}
+                <tr>
+                    
+                    <td>{{ parametre.nbConviveSeuil }}</td>
+                    <td>
+                        <a href="{{ path('app_parametres_edit', {'id': parametre.id}) }}">Editer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune entrée trouvée</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
